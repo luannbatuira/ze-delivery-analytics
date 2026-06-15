@@ -22,7 +22,7 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_q1_net_revenue_b
 | **Total** | **R$ 4.530,00** | **R$ 405,00** | **R$ 4.125,00** |
 
 ### Insights
-- Crescimento consistente de Janeiro (+62,3%) a Março, com leve retração em Abril (-16,4%).
+- Crescimento consistente de Janeiro a Março (+62,3%), com leve retração em Abril (-16,4%).
 - Março foi o mês de maior receita líquida (R$ 1.375), impulsionado por 4 pedidos incluindo um de R$ 1.030 (Monitor + Mouse).
 - Fevereiro registrou o maior impacto de reembolso relativo: R$ 100 de volta sobre R$ 1.090 brutos (9,2%).
 - Janeiro teve zero reembolsos — todos os pedidos foram entregues sem contestação.
