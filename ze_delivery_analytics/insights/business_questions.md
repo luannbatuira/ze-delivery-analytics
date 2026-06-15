@@ -25,7 +25,7 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_q1_net_revenue_b
 - Crescimento consistente de Janeiro a Março (+62,3%), com leve retração em Abril (-16,4%).
 - Março foi o mês de maior receita líquida (R$ 1.375), impulsionado por 4 pedidos incluindo um de R$ 1.030 (Monitor + Mouse).
 - Fevereiro registrou o maior impacto de reembolso relativo: R$ 100 de volta sobre R$ 1.090 brutos (9,2%).
-- Janeiro teve zero reembolsos — todos os pedidos foram entregues sem contestação.
+- Janeiro teve zero reembolsos, todos os pedidos foram entregues sem contestação.
 - A queda em Abril pode refletir sazonalidade ou base de comparação alta de Março, não necessariamente um problema estrutural.
 
 ---
@@ -47,10 +47,10 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_q2_new_customers
 | **Total** | **8** |
 
 ### Insights
-- 8 dos 12 clientes cadastrados realizaram ao menos uma compra válida no período — taxa de conversão de cadastro para compra de **66,7%**.
+- 8 dos 12 clientes cadastrados realizaram ao menos uma compra válida no período, taxa de conversão de cadastro para compra de **66,7%**.
 - Março foi o melhor mês de aquisição (3 novos compradores), coincidindo com o pico de receita.
-- Fevereiro foi o mês mais fraco em aquisição (1 novo cliente), mesmo com receita bruta de R$ 1.090 — sinal de que clientes recorrentes sustentaram o resultado.
-- 4 clientes cadastrados nunca realizaram uma compra válida no período analisado — oportunidade de ativação.
+- Fevereiro foi o mês mais fraco em aquisição (1 novo cliente), mesmo com receita bruta de R$ 1.090, sinal de que clientes recorrentes sustentaram o resultado.
+- 4 clientes cadastrados nunca realizaram uma compra válida no período analisado, oportunidade de ativação.
 
 ---
 
@@ -72,10 +72,10 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_q3_gross_revenue
 | **Total** | **R$ 4.530,00** | **100%** |
 
 ### Insights
-- **Monitores** lidera com 39,3% da receita bruta, concentrada em apenas 2 pedidos com o produto Monitor 24in (R$ 890/un) — alta dependência de SKU único.
+- **Monitores** lidera com 39,3% da receita bruta, concentrada em apenas 2 pedidos com o produto Monitor 24in (R$ 890/un), alta dependência de SKU único.
 - **Periféricos** é a categoria mais diversificada: Keyboard, Mouse e Webcam, representando 30,2% da receita.
-- Acessórios e Escritório empatam em R$ 540 cada — ambas com produtos de ticket menor e maior volume de itens.
-- **"Sem Categoria"** representa R$ 300 referente ao Gift Card (PRD006), produto com categoria ausente no cadastro — problema de qualidade de dados que distorce análises de mix.
+- Acessórios e Escritório empatam em R$ 540 cada, ambas com produtos de ticket menor e maior volume de itens.
+- **"Sem Categoria"** representa R$ 300 referente ao Gift Card (PRD006), produto com categoria ausente no cadastro, problema de qualidade de dados que distorce análises de mix.
 - Recomendação: classificar o Gift Card em uma categoria adequada (ex: `Vouchers`) e criar alerta para novos produtos sem categoria.
 
 ---
@@ -93,8 +93,8 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_q4_avg_ticket`;
 | 12 | R$ 4.530,00 | **R$ 377,50** |
 
 ### Insights
-- Ticket médio de R$ 377,50 é elevado para e-commerce de itens de escritório/tech — reflexo da presença de produtos de alto valor (Monitor R$ 890, Webcam R$ 320).
-- Variação expressiva entre pedidos: mínimo de R$ 120 (USB-C Cable) e máximo de R$ 1.030 (Monitor + Mouse) — alta dispersão que o ticket médio sozinho não captura.
+- Ticket médio de R$ 377,50 é elevado para e-commerce de itens de escritório/tech, reflexo da presença de produtos de alto valor (Monitor R$ 890, Webcam R$ 320).
+- Variação expressiva entre pedidos: mínimo de R$ 120 (USB-C Cable) e máximo de R$ 1.030 (Monitor + Mouse), alta dispersão que o ticket médio sozinho não captura.
 - Recomendação: acompanhar também mediana e distribuição por faixa de valor para entender melhor o comportamento de compra.
 
 #### Ticket médio por mês (via trusted_monthly_revenue)
@@ -110,7 +110,7 @@ Fevereiro teve o maior ticket médio (R$ 545) puxado pelo pedido de Monitor de R
 
 ---
 
-## Q5 — Quais problemas de qualidade foram encontrados nos dados?
+## Q5, Quais problemas de qualidade foram encontrados nos dados?
 
 ### 5a. Pagamentos captured duplicados
 
@@ -119,7 +119,7 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_duplicate_pay
 ```
 
 **Pedido O1009**: dois pagamentos `captured` de R$ 120,00 no mesmo dia via PIX.
-Possível duplicata de transação — se confirmado, a receita deste pedido está inflada em R$ 120.
+Possível duplicata de transação, se confirmado, a receita deste pedido está inflada em R$ 120.
 
 ---
 
@@ -129,8 +129,8 @@ Possível duplicata de transação — se confirmado, a receita deste pedido est
 SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_mixed_payment_status`;
 ```
 
-**Pedido O1008**: dois `captured` (R$ 600 + R$ 430) — tratado como parcelamento.
-**Pedido O1012**: `authorized` + `captured` — o `authorized` (PAY014) é ignorado na staging, apenas o `captured` (PAY015) é considerado.
+**Pedido O1008**: dois `captured` (R$ 600 + R$ 430), tratado como parcelamento.
+**Pedido O1012**: `authorized` + `captured`, o `authorized` (PAY014) é ignorado na staging, apenas o `captured` (PAY015) é considerado.
 
 ---
 
@@ -140,7 +140,7 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_mixed_payment
 SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_products_no_category`;
 ```
 
-**PRD006 — Gift Card**: categoria `NULL` no cadastro.
+**PRD006, Gift Card**: categoria `NULL` no cadastro.
 Tratado na `stg_dim_products` como `'Sem Categoria'`, mas distorce análises de mix de produto.
 **Ação recomendada**: classificar como `Vouchers` ou categoria equivalente.
 
@@ -152,8 +152,8 @@ Tratado na `stg_dim_products` como `'Sem Categoria'`, mas distorce análises de 
 SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_price_divergence`;
 ```
 
-**OI020 — Keyboard (PRD003)** no pedido O1014: vendido a R$ 250,00 vs `list_price` de R$ 260,00.
-Diferença de R$ 10,00 — possível desconto aplicado sem registro formal.
+**OI020, Keyboard (PRD003)** no pedido O1014: vendido a R$ 250,00 vs `list_price` de R$ 260,00.
+Diferença de R$ 10,00, possível desconto aplicado sem registro formal.
 **Ação recomendada**: criar campo `discount_amount` na tabela de itens para rastrear descontos explicitamente.
 
 ---
@@ -165,7 +165,7 @@ SELECT * FROM `analytics-project-499319.ze_delivery_project.stg_dq_canceled_with
 ```
 
 **Pedido O1005**: status `canceled` mas com pagamento `captured` de R$ 320,00.
-Indica que o pagamento foi capturado antes do cancelamento — deveria ter gerado reembolso (e de fato gerou: R003).
+Indica que o pagamento foi capturado antes do cancelamento, deveria ter gerado reembolso (e de fato gerou: R003).
 Sequência correta, mas o status do pagamento deveria ser atualizado para `refunded`.
 
 ---
