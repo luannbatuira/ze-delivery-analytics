@@ -1,0 +1,15 @@
+# CSVs com dados brutos — não versionar dados sensíveis
+*.csv
+
+# Credenciais e chaves
+*.json
+*.key
+service_account*.json
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Temporários
+*.tmp
+*.log
