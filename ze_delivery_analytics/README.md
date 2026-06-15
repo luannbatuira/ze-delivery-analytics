@@ -126,20 +126,10 @@ O INNER JOIN (não LEFT JOIN) em `stg_valid_orders` é intencional: garante que 
 **1. Investigar a duplicata de pagamento no O1009**
 Dois `captured` de R$120 via PIX no mesmo dia — alta probabilidade de duplicata. Acionaria o time financeiro para confirmar e, se confirmado, corrigiria a receita líquida de Março em -R$120.
 
-**2. Testes de qualidade automatizados**
-Implementaria testes estilo dbt para cada tabela:
-- Unicidade de `order_id` em `stg_valid_orders`
-- Not-null em `gross_revenue` e `order_date`
-- Range check: `unit_price > 0`, `amount > 0`
-- Referential integrity: todo `order_id` em `order_items` existe em `orders`
-
-**3. Materializar a camada Trusted**
+**2. Materializar a camada Trusted**
 Converter as views `trusted_*` em tabelas particionadas por `order_date` e clusterizadas por `order_month` e `country`, reduzindo custo e latência de consulta no BI.
 
-**4. Pipeline incremental**
-Substituir a carga full (`--replace`) por carga incremental baseada em `order_date`, processando apenas novos registros a cada execução.
-
-**5. Classificar o Gift Card**
+**3. Classificar o Gift Card**
 Criar categoria `Vouchers` para o PRD006 e adicionar alerta automático para novos produtos sem categoria antes de entrar em produção.
 
 ---
